@@ -1,0 +1,39 @@
+.mainNav{
+    width: 100%;
+    height: 70px;
+    padding-right: 20px;
+    background-color: #aef3f3;
+    position: sticky;
+    top: 0;
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+   
+}
+.mainNav Ul{
+    width: 15%;
+    
+    /* border: 1px solid ; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.mainNav ul li{
+    list-style: none;
+}
+.signUPButton  li{
+    list-style: none;
+}
+.mainNavLink{
+    text-decoration: none;
+    color: inherit;
+}
+.signUPButton{
+    min-width:  20%;
+    display: flex;
+    justify-content: space-around;
+}
+.signUPButton button{
+    border: none;
+    background-color: transparent;
+}

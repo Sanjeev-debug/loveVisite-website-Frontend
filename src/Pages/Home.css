@@ -1,0 +1,15 @@
+.mainHome{
+    width: 100%;
+    min-height: 100vh;
+    /* background-color: rgb(209, 247, 156); */
+    padding: 10px;
+}
+.homeCard{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+
+}
