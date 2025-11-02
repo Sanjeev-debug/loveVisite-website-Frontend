@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import API from '../assets/js/axios.js';
-const BACKEND_URL = import.meta.env.BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const fetchAllListing=createAsyncThunk('fetchAllListing', async(_, thunkAPI)=>{
   
