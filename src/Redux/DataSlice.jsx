@@ -1,9 +1,10 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import API from '../assets/js/axios.js';
+const BACKEND_URL = import.meta.env.BACKEND_URL;
 
 export const fetchAllListing=createAsyncThunk('fetchAllListing', async(_, thunkAPI)=>{
   
-    const response= await API.get('http://localhost:3000/listingAll');
+    const response= await API.get(`${BACKEND_URL}/listingAll`);
     console.log(response)
     return response.data;
   
@@ -17,7 +18,7 @@ export const addNewList=createAsyncThunk('addNewList', async(showDetail,thunkAPI
     }
     
     try{
-     const response= await API.post('http://localhost:3000/addNewList',formData,{
+     const response= await API.post(`${BACKEND_URL}/addNewList`,formData,{
         headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -43,7 +44,7 @@ export const updateList=createAsyncThunk('updateList', async(showDetail,thunkAPI
     
    
     console.log(updatelist);
-     const response= await API.post(`http://localhost:3000/updateList/${_id}`,updatelist,{
+     const response= await API.post(`${BACKEND_URL}/updateList/${_id}`,updatelist,{
         headers: {
         'Content-Type': 'multipart/form-data',
       }
@@ -61,7 +62,7 @@ export const updateList=createAsyncThunk('updateList', async(showDetail,thunkAPI
 export const deleteListing=createAsyncThunk('deleteListing', async(id,thunkAPI)=>{
   console.log(id)
   try{
-     const response= await API.get(`http://localhost:3000/deletelisting/${id}`);
+     const response= await API.get(`${BACKEND_URL}/deletelisting/${id}`);
      console.log(response)
      thunkAPI.dispatch(fetchAllListing());
     
@@ -78,7 +79,7 @@ export const deleteListing=createAsyncThunk('deleteListing', async(id,thunkAPI)=
 export const addReview=createAsyncThunk('addReview', async({id,review},thunkAPI)=>{
 
   try{
-    const response= await API.post(`http://localhost:3000/addReview/${id}`,review);
+    const response= await API.post(`${BACKEND_URL}/addReview/${id}`,review);
     console.log(response)
     thunkAPI.dispatch(UpdateshowDetail(response.data))
     thunkAPI.dispatch(fetchAllListing());
@@ -95,7 +96,7 @@ export const addReview=createAsyncThunk('addReview', async({id,review},thunkAPI)
 export const deleteReview=createAsyncThunk('deleteReview', async({id,reviewId},thunkAPI)=>{
   console.log(id,"=====",reviewId)
   try{
-     const response= await API.post(`http://localhost:3000/deleteReview/${id}/${reviewId}`);
+     const response= await API.post(`${BACKEND_URL}/deleteReview/${id}/${reviewId}`);
      console.log(response)
     //  thunkAPI.dispatch(fetchAllListing());
     
@@ -115,7 +116,7 @@ export const deleteReview=createAsyncThunk('deleteReview', async({id,reviewId},t
 export const addUser=createAsyncThunk('addUser', async(user,thunkAPI)=>{
      console.log(user)
   try{
-    const response= await API.post('http://localhost:3000/userRegister',user);
+    const response= await API.post(`${BACKEND_URL}/userRegister`,user);
     console.log(response.data)
      thunkAPI.dispatch(updateIsAuth(response.data));
     
@@ -134,7 +135,7 @@ export const addUser=createAsyncThunk('addUser', async(user,thunkAPI)=>{
 export const login=createAsyncThunk('login', async(userLogin,thunkAPI)=>{
      console.log(userLogin)
   try{
-    const response= await API.post('http://localhost:3000/login',userLogin);
+    const response= await API.post(`${BACKEND_URL}/login`,userLogin);
     console.log(response.data.currentUser)
      thunkAPI.dispatch(updateIsAuth(response.data.isAuthenticated));
      thunkAPI.dispatch(updateCurrentUserId(response.data.currentUser._id));
@@ -152,7 +153,7 @@ export const login=createAsyncThunk('login', async(userLogin,thunkAPI)=>{
 export const logout=createAsyncThunk('logout', async(_,thunkAPI)=>{
      
   try{
-    const response= await API.get('http://localhost:3000/logout');
+    const response= await API.get(`${BACKEND_URL}/logout`);
     console.log(response)
     thunkAPI.dispatch(updateIsAuth(response?.data?.isAuthenticated));
     thunkAPI.dispatch(updateCurrentUserId(response?.data?.currentUser?._id));
