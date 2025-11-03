@@ -11,9 +11,15 @@ const MapBox = ({showDetail}) => {
   const mapRef = useRef();
    const markerRef = useRef(null);
  
-
+  
 
     useEffect(() => {
+      const coords =
+    Array.isArray(showDetail?.geometry?.coordinates) &&
+    showDetail.geometry.coordinates.length === 2
+      ? showDetail.geometry.coordinates
+      : [77.209, 28.6139];
+
     mapboxgl.accessToken =
       "pk.eyJ1Ijoic2FuamVldjExMSIsImEiOiJjbWhkZmdnaG4wMmJ4MmxzZGcxMGRwOHF4In0.hr9_OdeKO6mdzt75SFnn3w";
 
@@ -22,7 +28,7 @@ const MapBox = ({showDetail}) => {
       mapRef.current = new mapboxgl.Map({
         container: mapContainerRef.current,
         style: "mapbox://styles/mapbox/streets-v11",
-        center: showDetail?.geometry?.coordinates || [77.209, 28.6139], // default Delhi
+        center: coords, // default Delhi
         zoom: 7,
       });
     }
@@ -34,13 +40,13 @@ const MapBox = ({showDetail}) => {
 
     // Add new marker
     markerRef.current = new mapboxgl.Marker({ color: "purple" })
-      .setLngLat(showDetail?.geometry?.coordinates || [77.209, 28.6139])
+      .setLngLat(coords)
       .setPopup(new mapboxgl.Popup({offset: 25, className: 'my-class'}).setHTML(`<h3>${showDetail?.description}</h3><p>Best for Visit</p>`))
       
       .addTo(mapRef.current);
 
     // Center map on new coordinates
-    mapRef.current.setCenter(showDetail?.geometry?.coordinates || [77.209, 28.6139]);
+    mapRef.current.setCenter(coords);
 
   }, [showDetail?.geometry?.coordinates]); 
 
