@@ -84,20 +84,22 @@ const handleCardDelete=()=>{
     e.preventDefault()
 
     dispatch(addReview({id:showDetail._id,review}))
-  }
 
+   
+  }
+     
   // console.log(showDetail.reviews)
 
 
   return (
     <>
       {showDetail && <div className="showMain">
-        <img src={showDetail.image.url} alt="" />
+        <img src={showDetail?.image?.url} alt="" />
         <div className='showDiv' >
           <i>{showDetail?.owner?.username}</i>
-          <h5>{showDetail.title}</h5>
-          <p>{showDetail.description}</p>
-       {showDetail.price &&   <h3>&#8377;{ showDetail.price.toLocaleString('en-IN')}</h3>}
+          <h5>{showDetail?.title}</h5>
+          <p>{showDetail?.description}</p>
+       {showDetail?.price &&   <h3>&#8377;{ showDetail?.price?.toLocaleString('en-IN')}</h3>}
           <div>
             <h4 style={{ display: 'inline', marginRight: '10px' }} >{showDetail.location}</h4>
             <h3 style={{ display: 'inline' }} >{showDetail.country}</h3>
@@ -113,7 +115,7 @@ const handleCardDelete=()=>{
         :""
        }
       </div>}
-      {open && <DeleteConform id={showDetail._id} />}
+      {open && <DeleteConform id={showDetail?._id} />}
       <br />
       < hr className='hr' />
       <br />
@@ -143,7 +145,7 @@ const handleCardDelete=()=>{
               <div className='showR' key={item._id} >
                 <i>{item?.author?.username}</i>
                 <p>{item.comment}</p>
-                <Rating name="rating" defaultValue={item.rating}  />
+                <Rating name="rating" defaultValue={item.rating} readOnly  />
                 <br />
                 <button  className='btn btn-sm btn-danger' onClick={()=>handleDelete(showDetail._id,item._id)} >Delete</button>
               </div>

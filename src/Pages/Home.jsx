@@ -14,9 +14,10 @@ const Home = () => {
 
 
  useEffect(() => {
-      dispatch(fetchAllListing());
-    
-  }, [dispatch]);
+  if (!AllListing ) {
+    dispatch(fetchAllListing());
+  }
+}, [dispatch, AllListing]);
     if (loading) return <Loading/>;
     
 

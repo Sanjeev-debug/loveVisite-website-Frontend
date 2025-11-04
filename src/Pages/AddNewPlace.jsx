@@ -40,9 +40,9 @@ useEffect(() => {
   const handleChange=(e)=>{
     const {name ,value,files}=e.target;
      if (name === "image") {
-      const file = files[0];
-      console.log(file)
-      dispatch(UpdateshowDetail({...showDetail,[name] :file}));
+      // const file = files[0];
+      // console.log(file)
+      dispatch(UpdateshowDetail({...showDetail,[name] :files[0]}));
      }else{
 
     dispatch(UpdateshowDetail({...showDetail,[name] :value}));

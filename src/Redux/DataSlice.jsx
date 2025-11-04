@@ -24,7 +24,7 @@ export const addNewList=createAsyncThunk('addNewList', async(showDetail,thunkAPI
       },
      });
     //  console.log(response)
-     dispatch(fetchAllListing());
+     thunkAPI.dispatch(fetchAllListing());
     
     return response.data;
     }catch(err){
@@ -64,6 +64,7 @@ export const deleteListing=createAsyncThunk('deleteListing', async(id,thunkAPI)=
   try{
      const response= await API.get(`${BACKEND_URL}/deletelisting/${id}`);
      console.log(response)
+    
      thunkAPI.dispatch(fetchAllListing());
     
     return response.data;
@@ -80,7 +81,7 @@ export const addReview=createAsyncThunk('addReview', async({id,review},thunkAPI)
 
   try{
     const response= await API.post(`${BACKEND_URL}/addReview/${id}`,review);
-    console.log(response)
+    console.log(response.data)
     thunkAPI.dispatch(UpdateshowDetail(response.data))
     thunkAPI.dispatch(fetchAllListing());
     return response.data;
@@ -98,7 +99,8 @@ export const deleteReview=createAsyncThunk('deleteReview', async({id,reviewId},t
   try{
      const response= await API.post(`${BACKEND_URL}/deleteReview/${id}/${reviewId}`);
      console.log(response)
-    //  thunkAPI.dispatch(fetchAllListing());
+     thunkAPI.dispatch(UpdateshowDetail(response.data))
+     thunkAPI.dispatch(fetchAllListing());
     
     return response.data;
   }catch(err){
@@ -174,7 +176,7 @@ export const logout=createAsyncThunk('logout', async(_,thunkAPI)=>{
 const initialState = {
      AddButtonText:false,
     open:false,
-   showDetail:'',
+   showDetail:"",
     AllListing:[],
     loading:false,
     error:null,
