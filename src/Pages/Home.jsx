@@ -13,11 +13,12 @@ const Home = () => {
  const dispatch=useDispatch();
 
 
- useEffect(() => {
-  if (!AllListing ) {
+useEffect(() => {
+  if (!AllListing || AllListing.length === 0) {
     dispatch(fetchAllListing());
   }
-}, [dispatch, AllListing]);
+}, [dispatch]);
+
     if (loading) return <Loading/>;
     
 
